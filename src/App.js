@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TaskList from "./components/TasksList";
 import AddTask from "./components/AddTask";
 
@@ -9,6 +9,17 @@ const App = () => {
     const newTasks = [...tasks, { id: Date.now(), title, completed: false }];
     setTasks(newTasks);
   };
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
+
+  const storedTasks = localStorage.getItem("tasks");
+  useEffect(() => {
+    if (storedTasks) {
+      setTasks(JSON.parse(storedTasks));
+    }
+  }, []);
 
   const toggleTask = (id) => {
     const newTasks = tasks.map((task) => {

@@ -2,5 +2,6 @@
 
 ### Projet réalisé par Marion Rollando
 
-![Capture d’écran du 2023-12-19 11-30-36](https://github.com/Marion-Rld/TodoList/assets/122606009/7fe99f58-a6ef-4285-95ad-eb6082968e9f)
+![Capture d’écran du 2023-12-19 13-21-32](https://github.com/Marion-Rld/TodoList/assets/122606009/df6ef895-a5b6-423b-901e-5ab972fbd95f)
+
 

@@ -5,22 +5,29 @@ import AddTask from "./components/AddTask";
 const App = () => {
   const [tasks, setTasks] = useState([]);
 
-  const addTask = (title) => {
-    const newTasks = [...tasks, { id: Date.now(), title, completed: false }];
-    setTasks(newTasks);
-  };
-
   useEffect(() => {
+    // Save tasks to local storage whenever tasks state changes
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
 
+  // Load tasks from local storage when the component mounts
   const storedTasks = localStorage.getItem("tasks");
+
   useEffect(() => {
     if (storedTasks) {
+      // Set the tasks state to the tasks stored in local storage
       setTasks(JSON.parse(storedTasks));
     }
   }, []);
 
+  // Add a new task to the tasks array
+  const addTask = (title) => {
+    // Create a new array of tasks with the new task object added to the end
+    const newTasks = [...tasks, { id: Date.now(), title, completed: false }];
+    setTasks(newTasks);
+  };
+
+  // Toggle the completed status of a task
   const toggleTask = (id) => {
     const newTasks = tasks.map((task) => {
       if (task.id === id) {
@@ -31,8 +38,21 @@ const App = () => {
     setTasks(newTasks);
   };
 
+  // Delete a task from the tasks array
   const deleteTask = (id) => {
     const newTasks = tasks.filter((task) => task.id !== id);
+    setTasks(newTasks);
+  };
+
+  // Edit the title of a task
+  const editTask = (id, newTitle) => {
+    // Map through the tasks array, and if the task id matches the id of the task being edited, update the title
+    const newTasks = tasks.map((task) => {
+      if (task.id === id) {
+        return { ...task, title: newTitle };
+      }
+      return task;
+    });
     setTasks(newTasks);
   };
 
@@ -45,6 +65,7 @@ const App = () => {
           tasks={tasks}
           toggleTask={toggleTask}
           deleteTask={deleteTask}
+          editTask={editTask}
         />
       </div>
     </div>

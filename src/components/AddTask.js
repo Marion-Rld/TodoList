@@ -3,6 +3,7 @@ import React, { useState } from "react";
 const AddTask = ({ addTask }) => {
   const [value, setValue] = useState("");
 
+  // Function to handle the form submission
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!value) return;
